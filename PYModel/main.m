@@ -7,11 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TestModel.h"
+#import "NSObject+KeyValues.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         // insert code here...
         NSLog(@"Hello, World!");
+        
+        
+        TestModel * testModel = [TestModel objectWithKeyValues:@{@"c":@{@"a": @"456"},@"a": @"123",@"b":@(2)}];
+        
+        NSLog(@"%@",testModel.keyValuesWithObject);
     }
     return 0;
 }

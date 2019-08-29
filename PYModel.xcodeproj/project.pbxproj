@@ -6,8 +6,24 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		5781D3212317932300E629AF /* OCLint */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5781D3222317932300E629AF /* Build configuration list for PBXAggregateTarget "OCLint" */;
+			buildPhases = (
+				5781D32823179B3F00E629AF /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = OCLint;
+			productName = OCLint;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		5781D3152317697E00E629AF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5781D3142317697E00E629AF /* main.m */; };
+		5781D31D231769EE00E629AF /* NSObject+KeyValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 5781D31C231769EE00E629AF /* NSObject+KeyValues.m */; };
+		5781D32023176CBF00E629AF /* TestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 5781D31F23176CBF00E629AF /* TestModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +41,10 @@
 /* Begin PBXFileReference section */
 		5781D3112317697E00E629AF /* PYModel */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PYModel; sourceTree = BUILT_PRODUCTS_DIR; };
 		5781D3142317697E00E629AF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5781D31B231769EE00E629AF /* NSObject+KeyValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+KeyValues.h"; sourceTree = "<group>"; };
+		5781D31C231769EE00E629AF /* NSObject+KeyValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KeyValues.m"; sourceTree = "<group>"; };
+		5781D31E23176CBF00E629AF /* TestModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestModel.h; sourceTree = "<group>"; };
+		5781D31F23176CBF00E629AF /* TestModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				5781D3142317697E00E629AF /* main.m */,
+				5781D31B231769EE00E629AF /* NSObject+KeyValues.h */,
+				5781D31C231769EE00E629AF /* NSObject+KeyValues.m */,
+				5781D31E23176CBF00E629AF /* TestModel.h */,
+				5781D31F23176CBF00E629AF /* TestModel.m */,
 			);
 			path = PYModel;
 			sourceTree = "<group>";
@@ -94,6 +118,9 @@
 					5781D3102317697E00E629AF = {
 						CreatedOnToolsVersion = 10.3;
 					};
+					5781D3212317932300E629AF = {
+						CreatedOnToolsVersion = 10.3;
+					};
 				};
 			};
 			buildConfigurationList = 5781D30C2317697E00E629AF /* Build configuration list for PBXProject "PYModel" */;
@@ -109,16 +136,39 @@
 			projectRoot = "";
 			targets = (
 				5781D3102317697E00E629AF /* PYModel */,
+				5781D3212317932300E629AF /* OCLint */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5781D32823179B3F00E629AF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ${SRCROOT}\nxcodebuild clean\nxcodebuild | xcpretty -r json-compilation-database --output compile_commands.json\noclint-json-compilation-database -i Pods -- \n-rc=LONG_CLASS=1000 \n-rc=LONG_LINE=200\noclint-json-compilation-database -- -report-type=html -o=report.html \nopen report.html\nrm -rf build\nrm compile_commands.json\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5781D30D2317697E00E629AF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5781D32023176CBF00E629AF /* TestModel.m in Sources */,
 				5781D3152317697E00E629AF /* main.m in Sources */,
+				5781D31D231769EE00E629AF /* NSObject+KeyValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +302,22 @@
 			};
 			name = Release;
 		};
+		5781D3232317932300E629AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5781D3242317932300E629AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -269,6 +335,15 @@
 			buildConfigurations = (
 				5781D3192317697E00E629AF /* Debug */,
 				5781D31A2317697E00E629AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5781D3222317932300E629AF /* Build configuration list for PBXAggregateTarget "OCLint" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5781D3232317932300E629AF /* Debug */,
+				5781D3242317932300E629AF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
